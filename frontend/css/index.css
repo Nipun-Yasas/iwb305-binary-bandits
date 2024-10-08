@@ -1,0 +1,20 @@
+nav .nav-link {
+    font-size: 16px;
+    color: #000; /* Use !important if something else overrides the color */
+    font-family: Arial, sans-serif;
+    opacity: 0.5;
+  }
+
+nav .nav-link:hover {
+    opacity: 1;
+  }
+
+nav .nav-link.active {
+    opacity: 1;
+  }
+
+.add{
+    border-radius: 50px;
+    border: none;
+}
+
