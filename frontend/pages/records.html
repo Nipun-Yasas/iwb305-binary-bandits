@@ -12,58 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="records.css">
-    <style>
-        /* Custom styles for better visualization */
-        .sidebar {
-            min-height: 100vh;
-        }
-
-        .icon-circle img {
-            border-radius: 50%;
-        }
-
-        .interest-badge {
-            background-color: #ffc107;
-            color: #fff;
-            padding: 0.25em 0.5em;
-            border-radius: 0.25rem;
-            font-size: 0.75rem;
-        }
-
-        .more-options {
-            cursor: pointer;
-        }
-
-        /* Hide elements with 'hidden' class */
-        .hidden {
-            display: none;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .sidebar {
-                display: none;
-            }
-
-            .sidebar.active {
-                display: block;
-                position: absolute;
-                background-color: #343a40;
-                width: 100%;
-                z-index: 1000;
-            }
-
-            .toggle-sidebar {
-                display: block;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .toggle-sidebar {
-                display: none;
-            }
-        }
-    </style>
+    
 </head>
 
 <body>
@@ -233,7 +182,12 @@
                                     width="30">
                             </span>
                             <span class="ms-2 fw-bold">Income</span>
+                            <!-- More Options (3 dots) -->
+                            <div class="col-md-2 text-end">
+                                <i class="bi bi-three-dots-vertical more-options"></i>
+                            </div>
                         </div>
+                        
                         <!-- Bank and Loan Details -->
                         <div class="col-md-3 d-flex align-items-center">
                             <span class="badge bg-primary rounded-circle me-2"
@@ -249,12 +203,11 @@
                         <div class="col-md-2 text-end text-success fw-bold">
                             LKR 7,500.00
                         </div>
-                        <!-- More Options (3 dots) -->
-                        <div class="col-md-2 text-end">
-                            <i class="bi bi-three-dots-vertical more-options"></i>
-                        </div>
+                       
                     </div>
                     <!-- Repeat the above block for additional records -->
+
+                    <br>
 
                     <!-- Example: Record Two -->
                     <div class="row align-items-center py-3 bg-light rounded-3">
@@ -267,6 +220,10 @@
                                     width="30">
                             </span>
                             <span class="ms-2 fw-bold">Expense</span>
+                            <!-- More Options (3 dots) -->
+                            <div class="col-md-2 text-end">
+                                <i class="bi bi-three-dots-vertical more-options"></i>
+                            </div>
                         </div>
                         <div class="col-md-3 d-flex align-items-center">
                             <span class="badge bg-danger rounded-circle me-2" style="width: 12px; height: 12px;"></span>
@@ -279,9 +236,7 @@
                         <div class="col-md-2 text-end text-danger fw-bold">
                             LKR -5,000.00
                         </div>
-                        <div class="col-md-2 text-end">
-                            <i class="bi bi-three-dots-vertical more-options"></i>
-                        </div>
+                      
                     </div>
                     <!-- Add more records as needed -->
                 </div>
