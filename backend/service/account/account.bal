@@ -10,9 +10,8 @@ type Account record {|
     int? id;
 |};
 //create new http listner
-http:Listener listener = new(8080);
 
-service /account on new listener {
+service /account on new http:Listener(8080) {
     resource function get .() returns json|error {
         mysql:Client|sql:Error dbClientResult = new ("localhost", "root", "KaviskaDilshan12#$", "ballerina-001", 3306);
 
@@ -122,10 +121,6 @@ service /account on new listener {
 
 }
 
-service  /user on listener {
-    resource function get .() returns json {
-        return {"message": "Hello, World!"};
-    }
+service on user {
     
 }
-
