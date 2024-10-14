@@ -9,9 +9,15 @@ type Account record {|
     string? types;
     int? id;
 |};
-//create new http listner
 
-service /account on new http:Listener(8080) {
+type DeleteRequest record {|
+    int id;
+|};
+//create new http listner
+listener http:Listener httpListener = new(8080);
+
+
+service /account on httpListener {
     resource function get .() returns json|error {
         mysql:Client|sql:Error dbClientResult = new ("localhost", "root", "KaviskaDilshan12#$", "ballerina-001", 3306);
 
@@ -92,7 +98,7 @@ service /account on new http:Listener(8080) {
         return {"status": "Successfully updated the account"};
     }
 
-    resource function delete remove(http:Request req,@http:Payload Account account) returns map<json>|error {
+    resource function delete remove(http:Request req,@http:Payload DeleteRequest account) returns map<json>|error {
         mysql:Client|sql:Error dbClientResult = new ("localhost", "root", "KaviskaDilshan12#$", "ballerina-001", 3306);
 
         if (dbClientResult is sql:Error) {
@@ -119,8 +125,4 @@ service /account on new http:Listener(8080) {
         return {"status": "Successfully deleted the account"};
     }
 
-}
-
-service on user {
-    
 }
