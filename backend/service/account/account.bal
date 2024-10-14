@@ -4,8 +4,8 @@ import ballerinax/mysql;
 
 // Create the MySQL database configuration.
 type Account record {|
-    string? number;
-    string? branch;
+    string? name;
+    string? initial_amount;
     string? types;
     int? id;
 |};
@@ -27,14 +27,14 @@ service /account on httpListener {
 
         mysql:Client dbClient = <mysql:Client>dbClientResult;
 
-        stream<record {int id; string number; string branch; string types;}, sql:Error?> accountStream = dbClient->query(`SELECT id, number, branch, types FROM account`);
+        stream<record {int id; string name; string initial_amount; string types;}, sql:Error?> accountStream = dbClient->query(`SELECT id, name, initial_amount, types FROM account`);
         json[] account = [];
 
-        error? e = accountStream.forEach(function(record {int id; string number; string branch; string types;} accountRecord) {
+        error? e = accountStream.forEach(function(record {int id; string name; string initial_amount; string types;} accountRecord) {
             account.push({
                 "id": accountRecord.id,
-                "number": accountRecord.number,
-                "branch": accountRecord.branch,
+                "name": accountRecord.name,
+                "initial_amount": accountRecord.initial_amount,
                 "types": accountRecord.types
             });
         });
@@ -59,7 +59,7 @@ service /account on httpListener {
 
         mysql:Client dbClient = <mysql:Client>dbClientResult;
 
-        sql:ParameterizedQuery query = `INSERT INTO account (number, branch, types) VALUES (${account.number}, ${account.branch}, ${account.types})`;
+        sql:ParameterizedQuery query = `INSERT INTO account (name, initial_amount, types) VALUES (${account.name}, ${account.initial_amount}, ${account.types})`;
 
         sql:ExecutionResult result = check dbClient->execute(query);
 
@@ -83,7 +83,7 @@ service /account on httpListener {
 
         mysql:Client dbClient = <mysql:Client>dbClientResult;
 
-        sql:ParameterizedQuery query = `UPDATE account SET branch = ${account.branch}, types = ${account.types} WHERE number = ${account.id}`;
+        sql:ParameterizedQuery query = `UPDATE account SET initial_amount = ${account.initial_amount}, types = ${account.types} WHERE name = ${account.id}`;
 
         sql:ExecutionResult result = check dbClient->execute(query);
 
