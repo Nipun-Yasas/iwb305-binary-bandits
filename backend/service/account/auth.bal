@@ -94,21 +94,38 @@ service /auth on httpListener {
     //     }
     // }
 
-    // resource function post register(http:Request req, @http:Payload User newUser) returns json|error {
-    //     // Hash the user's password before storing it
-    //     string hashedPassword = hashPassword(newUser.password);
+    resource function post register(http:Request req,http:Caller caller, @http:Payload UserAuh userAuth) returns error? {
+        // Hash the user's password before storing it
+        string email = userAuth.email;
+        string password = userAuth.password;
 
-    //     // Prepare an SQL query to insert the new user into the database
-    //     sql:ParameterizedQuery query = `INSERT INTO users (email, password) VALUES (${newUser.email}, ${hashedPassword})`;
 
-    //     // Execute the query
-    //     sql:ExecutionResult result = check dbClient->execute(query);
-    //     if result.affectedRowCount == 0 {
-    //         return {message: "User registration failed"};
-    //     }
+        // Prepare an SQL query to insert the ner into the database
+        sql:ParameterizedQuery query = `INSERT INTO users (email, password) VALUES (${email}, ${password})`;
 
-    //     return {message: "User registered successfully"};
-    // }
+        // Execute the query
+        sql:ExecutionResult result = check dbClient->execute(query);
+        if result.affectedRowCount == 0 {
+            return error("User registration failed");
+        }
+
+       if authenticateUser(email, password) {
+            // If authenticated, generate a JWT token
+            string userId = check getUserId(email); // Fetch user ID based on email
+            // string jwtToken = check jwt:issue(jwtIssuerConfig);
+            jwt:IssuerConfig issuerConfig = {
+                issuer: "your-app",
+                audience: "your-users",
+                expTime: 3600, // Token expiration time in seconds
+                customClaims: {
+                    "username": email
+                }
+            };
+            string jwtToken = check jwt:issue(issuerConfig);
+            json response = {message: "Login successful", userId: userId, token: jwtToken};
+            check caller->respond(response);
+        }
+    }
 }
 
 // Mock function to validate email and password against the database
