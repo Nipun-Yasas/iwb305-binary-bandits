@@ -16,6 +16,15 @@ type DeleteRequest record {|
 //create new http listner
 listener http:Listener httpListener = new(8080);
 
+@http:ServiceConfig {
+    cors: {
+        allowOrigins: ["http://www.m3.com", "http://www.hello.com"],
+        allowCredentials: false,
+        allowHeaders: ["CORELATION_ID"],
+        exposeHeaders: ["X-CUSTOM-HEADER"],
+        maxAge: 84900
+    }
+}
 
 service /account on httpListener {
     resource function get .() returns json|error {
