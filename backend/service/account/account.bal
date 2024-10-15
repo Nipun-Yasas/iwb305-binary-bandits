@@ -19,7 +19,7 @@ listener http:Listener httpListener = new(8080);
 
 service /account on httpListener {
     resource function get .() returns json|error {
-        mysql:Client|sql:Error dbClientResult = new ("localhost", "root", "KaviskaDilshan12#$", "ballerina-001", 3306);
+        mysql:Client|sql:Error dbClientResult = new (dbHost, dbUsername, dbPassword, dbName, dbPort);
 
         if (dbClientResult is sql:Error) {
             return {"error": dbClientResult.message()};
@@ -51,7 +51,7 @@ service /account on httpListener {
     }
 
     resource function post add(http:Request req, @http:Payload Account account) returns map<json>|error {
-        mysql:Client|sql:Error dbClientResult = new ("localhost", "root", "KaviskaDilshan12#$", "ballerina-001", 3306);
+        mysql:Client|sql:Error dbClientResult = new (dbHost, dbUsername, dbPassword, dbName, dbPort);
 
         if (dbClientResult is sql:Error) {
             return {"error": dbClientResult.message()};
@@ -75,7 +75,7 @@ service /account on httpListener {
     }
 
     resource function put update(http:Request req, @http:Payload Account account) returns map<json>|error {
-        mysql:Client|sql:Error dbClientResult = new ("localhost", "root", "KaviskaDilshan12#$", "ballerina-001", 3306);
+        mysql:Client|sql:Error dbClientResult = new (dbHost, dbUsername, dbPassword, dbName, dbPort);
 
         if (dbClientResult is sql:Error) {
             return {"error": dbClientResult.message()};
@@ -99,7 +99,7 @@ service /account on httpListener {
     }
 
     resource function delete remove(http:Request req,@http:Payload DeleteRequest account) returns map<json>|error {
-        mysql:Client|sql:Error dbClientResult = new ("localhost", "root", "KaviskaDilshan12#$", "ballerina-001", 3306);
+        mysql:Client|sql:Error dbClientResult = new (dbHost, dbUsername, dbPassword, dbName, dbPort);
 
         if (dbClientResult is sql:Error) {
             return {"error": dbClientResult.message()};

@@ -15,7 +15,7 @@ type UserAuh record {|
 |};
 
 // MySQL Client Configuration
-mysql:Client dbClient = check new ("localhost", "root", "KaviskaDilshan12#$", "ballerina-001", 3306);
+mysql:Client dbClient = check new (dbHost, dbUsername, dbPassword, dbName, dbPort);
 
 // Define JWT issuer
 // jwt:IssuerConfig jwtIssuerConfig = {
