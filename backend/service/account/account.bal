@@ -18,7 +18,7 @@ listener http:Listener httpListener = new(9001);
 
 @http:ServiceConfig {
     cors: {
-        allowOrigins: ["http://www.m3.com", "http://www.hello.com"],
+        allowOrigins: ["  http://127.0.0.1:8000", "http://www.hello.com"],
         allowCredentials: false,
         allowHeaders: ["CORELATION_ID"],
         exposeHeaders: ["X-CUSTOM-HEADER"],
