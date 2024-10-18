@@ -5,7 +5,7 @@ import ballerinax/mysql;
 // Create the MySQL database configuration.
 type Account record {|
     string? name;
-    string? initial_amount;
+    int? initial_amount;
     string? types;
     int? id;
 |};
@@ -14,7 +14,7 @@ type DeleteRequest record {|
     int id;
 |};
 //create new http listner
-listener http:Listener httpListener = new(9001);
+listener http:Listener httpListener = new(8080);
 
 @http:ServiceConfig {
     cors: {
@@ -36,10 +36,10 @@ service /account on httpListener {
 
         mysql:Client dbClient = <mysql:Client>dbClientResult;
 
-        stream<record {int id; string name; string initial_amount; string types;}, sql:Error?> accountStream = dbClient->query(`SELECT id, name, initial_amount, types FROM account`);
+        stream<record {int id; string name; int initial_amount; string types;}, sql:Error?> accountStream = dbClient->query(`SELECT id, name, initial_amount, types FROM account`);
         json[] account = [];
 
-        error? e = accountStream.forEach(function(record {int id; string name; string initial_amount; string types;} accountRecord) {
+        error? e = accountStream.forEach(function(record {int id; string name; int initial_amount; string types;} accountRecord) {
             account.push({
                 "id": accountRecord.id,
                 "name": accountRecord.name,
