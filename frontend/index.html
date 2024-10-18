@@ -273,6 +273,42 @@
       </div>
     </div>
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const addAccount = async () => {
+    const url = 'http://localhost:9001/account/add';
+    const data = {
+        name: "John Doe",
+        initial_amount: "1000",
+        types: "Savings",
+        id:123
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log('Account added successfully:', result);
+    } catch (error) {
+        console.error('Error adding account:', error);
+    }
+};
+
+// Call the function to add an account
+addAccount();
+    });
+  </script>
   
 </body>
 </html>
