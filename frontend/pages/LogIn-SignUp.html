@@ -21,12 +21,12 @@
         <div class="slider-tab"></div>
       </div>
       <div class="form-inner">
-        <form action="#" class="login">
+        <form id="loginform" action="#" class="login" onsubmit="handleLogin(event)">
           <div class="field">
-            <input type="text" placeholder="Email Address" required>
+            <input type="text" id="loginEmail" placeholder="Email Address" required>
           </div>
           <div class="field">
-            <input type="password" placeholder="Password" required>
+            <input type="password" id="loginPassword" placeholder="Password" required>
           </div>
           <div class="pass-link"><a href="#">Forgot password?</a></div>
           <div class="field btn">
@@ -35,15 +35,15 @@
           </div>
           <div class="signup-link">Not a member? <a href="/frontend/index.html">Signup now</a></div>
         </form>
-        <form action="#" class="signup">
+        <form id="signupform" action="#" class="signup" onsubmit="handleSignup(event)">
           <div class="field">
-            <input type="text" placeholder="Email Address" required>
+            <input type="text" id="signupEmail" placeholder="Email Address" required>
           </div>
           <div class="field">
-            <input type="password" placeholder="Password" required>
+            <input type="password" id="signupPassword" placeholder="Password" required>
           </div>
           <div class="field">
-            <input type="password" placeholder="Confirm password" required>
+            <input type="password" id="conformPassword" placeholder="Confirm password" required>
           </div>
           <div class="field btn">
             <div class="btn-layer"></div>
@@ -55,5 +55,57 @@
   </div>
 
   <script src="../js/LogIn-SignUp.js"></script>
+  <script>
+    async function handleLogin(event) {
+        event.preventDefault(); // Prevent form submission
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+    
+        const response = await fetch('http://localhost:8080/user/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        });
+    
+        const result = await response.json();
+        alert(result.status || result.error); // Alert the response message
+    }
+    
+    async function handleSignup(event) {
+        event.preventDefault(); // Prevent form submission
+        const email = document.getElementById('signupEmail').value;
+        const password = document.getElementById('signupPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+    
+        if (password !== confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
+    
+        const response = await fetch('http://localhost:5501/user/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: email, // Assuming name is the email for signup
+                email: email,
+                password: password,
+                primary_income_source: '', // Adjust as needed
+                primary_saving_goal: '', // Adjust as needed
+                current_debt_amount: '' // Adjust as needed
+            })
+        });
+    
+        const result = await response.json();
+        alert(result.status || result.error); // Alert the response message
+    }
+    </script>
+    
 </body>
 </html>

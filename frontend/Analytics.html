@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>loan-records</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- font awsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../frontend/css/Analytics.css">
+    <script defer src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="node_modules/chart.js/dist/chart.umd.js"></script>
+
+
+</head>
+
+<body>
+
+    <!-- Toggle Sidebar Button for Mobile -->
+    <button class="btn btn-primary toggle-sidebar m-3 d-md-none" type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+        <i class="bi bi-list"></i> Menu
+    </button>
+
+    <!-- Offcanvas Sidebar for Mobile -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title " id="offcanvasSidebarLabel">Analitics</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Sidebar Content -->
+            <div class="mb-3">
+                <!-- Add Records Button -->
+                <button type="button" class="btn btn-primary w-100 mb-3" data-bs-toggle="modal"
+                    data-bs-target="#exampleModalCenter">
+                    
+                </button>
+
+                <!-- Search Section -->
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            </div>
+
+            <!-- Filter Section -->
+            <h5>Filter</h5>
+            <div class="mb-3">
+                <select class="form-select" aria-label="No saved filters">
+                    <option selected>No saved filters</option>
+                </select>
+            </div>
+            <h6>Accounts <span class="text-primary">12</span></h6>
+            <ul class="list-group">
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="bi bi-eye-slash me-2"></i> All Accounts
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="bi bi-eye me-2"></i> Cash
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="bi bi-eye me-2"></i> Sampath Bank
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="bi bi-eye me-2"></i> BOC
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="bi bi-eye me-2"></i> HNB
+                </li>
+                <li class="list-group-item d-flex align-items-center hidden">
+                    <i class="bi bi-eye-slash me-2"></i> Sampath FD
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="bi bi-eye me-2"></i> Commercial Bank
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="bi bi-eye me-2"></i> People's Bank
+                </li>
+                <li class="list-group-item d-flex align-items-center hidden">
+                    <i class="bi bi-eye-slash me-2"></i> Samya Ranasinghe -28 - 5 Lakh
+                </li>
+                <li class="list-group-item d-flex align-items-center hidden">
+                    <i class="bi bi-eye-slash me-2"></i> Lending - 2 Lakh
+                </li>
+                <li class="list-group-item d-flex align-items-center hidden">
+                    <i class="bi bi-eye-slash me-2"></i> Chathura - 40K Loan - 13
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar for Desktop -->
+            <nav class="col-md-3 col-lg-3 d-none d-md-block bg-dark sidebar px-3">
+                <div>
+                    <div class="col text-center">
+                        <h1 class="text-white mt-4 text-align" style="font-size: 50px;">Analitics</h1>
+                    </div>
+                </div>
+                <!-- Add Records Button -->
+                <div class="row mb-5 justify-content-center">
+                    <div class="col-auto mt-4 mb-0">
+                        <button type="button" class="btn btn-primary w-100 mb-3" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalCenter">
+                            Add Records
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search Section -->
+                <div class="my-3">
+                    <!-- <label for="from-account" class="form-label">Select Category</label> -->
+                    <select class="form-select" id="from-account" required>
+                        <option selected disabled value="">Select Category</option>
+                        <option>101922002299-Sampath</option>
+                        <option>101922002299-HNB</option>
+                    </select>
+                </div>
+
+                <!-- Filter Section -->
+
+                <div class="my-">
+                    <h5 class="text-white">Filter</h5>
+                    <div>
+                        <select class="form-select" aria-label="No saved filters">
+                            <option selected>No saved filters</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="row my-4 justify-content-center">
+                    <div class="dropdown col-auto mb-2">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 19px;">
+                            Accounts <span class="text-primary">12</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <button class="dropdown-item" type="button"><i class="bi bi-eye me-2"></i>All
+                                Accounts</button>
+                            <button class="dropdown-item" type="button"><i class="bi bi-eye me-2"></i>Sampath
+                                Bank</button>
+                            <button class="dropdown-item" type="button"><i class="bi bi-eye me-2"></i>Commercial
+                                Bank</button>
+                            <button class="dropdown-item" type="button"><i class="bi bi-eye me-2"></i>Commercial
+                                Bank</button>
+                            <button class="dropdown-item" type="button"><i class="bi bi-eye me-2"></i>Commercial
+                                Bank</button>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </nav>
+
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-9 px-md-4 bg-secondary">
+                <div class="containers mt-4">
+                    <!-- Summary Row -->
+                    <div class="row align-items-center py-2 bg-light rounded-3">
+                        <!-- Checkbox -->
+                        <div class="col-auto">
+                            <input type="checkbox" id="selectAll" class="form-check-input">
+                            <label for="selectAll" class="form-check-label">Select all</label>
+                        </div>
+
+                        <!-- Amount (aligned right) -->
+                        <div class="col text-end">
+                            <!-- <span class="fw-bold">-LKR 195,458.00</span> -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Records Section 1 -->
+                <div class="containers mt-4">
+                    <div class="row g-3" >
+                      <div class="col-lg-5 col-md-9">
+                        <h1>Cash Flow</h1>
+                        <canvas id="myChart1"></canvas>
+                      </div>
+
+                      <div class="col-lg-5">
+                        <h1>Cash Flow</h1>
+                        <canvas id="myChart2"></canvas>
+                      </div>
+
+                        
+                    </div>
+
+      
+                </div>
+                
+                
+
+                <!-- Records Section 2 -->
+                <div class="containers mt-4">
+                 <div>
+                  
+                 </div>
+                    <!-- Example Record -->
+
+
+
+                    
+                </div>
+
+            </main>
+
+
+            <!-- Repeat the above block for additional records -->
+
+            <br>
+
+            <!-- Example: Record Two -->
+
+            <!-- Add more records as needed -->
+        </div>
+        </main>
+    </div>
+    </div>
+
+    <!-- Add Records Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Add New Record</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Modal content goes here -->
+                    <form>
+                        <div class="mb-3">
+                            <label for="recordType" class="form-label">Type</label>
+                            <select class="form-select" id="recordType" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option>Income</option>
+                                <option>Expense</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bankName" class="form-label">Bank</label>
+                            <input type="text" class="form-control" id="bankName" placeholder="Enter bank name"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loanDetails" class="form-label">Loan Details</label>
+                            <input type="text" class="form-control" id="loanDetails" placeholder="Enter loan details"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="form-label">Amount (LKR)</label>
+                            <input type="number" class="form-control" id="amount" placeholder="Enter amount" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="badgeType" class="form-label">Badge Type</label>
+                            <select class="form-select" id="badgeType" required>
+                                <option selected disabled value="">Choose...</option>
+                                <option>Interest</option>
+                                <option>Principal</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <!-- Add more fields as needed -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Record</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper (Bootstrap 5) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <!-- Optional: Custom JavaScript for Select All functionality -->
+    <script>
+        document.getElementById('selectAll').addEventListener('change', function () {
+            const checkboxes = document.querySelectorAll('.select-item');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+        });
+    </script>
+ <script>
+  // Replace the Utils.months and Utils.numbers with static values
+  const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  const data1 = [10, 20, 30, 40, 50, 60, 70];
+  const data2 = [15, 25, 35, 45, 55, 65, 75];
+
+  const data = {
+      labels: labels,
+      datasets: [
+          {
+              label: 'Dataset 1',
+              data: data1,
+              fill: false,
+              borderColor: 'red',
+              backgroundColor: 'rgba(255, 0, 0, 0.5)',
+          },
+          {
+              label: 'Dataset 2',
+              data: data2,
+              fill: false,
+              borderColor: 'blue',
+              backgroundColor: 'rgba(0, 0, 255, 0.5)',
+          }
+      ]
+  };
+
+  const config = {
+      type: 'line',
+      data: data,
+      options: {
+          responsive: true,
+          scales: {
+              x: {
+                  display: true,
+                  title: {
+                      display: true,
+                      text: 'Month',
+                      color: '#911',
+                      font: {
+                          family: 'Comic Sans MS',
+                          size: 20,
+                          weight: 'bold',
+                          lineHeight: 1.2,
+                      },
+                      padding: { top: 20, left: 0, right: 0, bottom: 0 }
+                  }
+              },
+              y: {
+                  display: true,
+                  title: {
+                      display: true,
+                      text: 'Value',
+                      color: '#191',
+                      font: {
+                          family: 'Times',
+                          size: 20,
+                          style: 'normal',
+                          lineHeight: 1.2
+                      },
+                      padding: { top: 30, left: 0, right: 0, bottom: 0 }
+                  }
+              }
+          }
+      }
+  };
+
+  new Chart(document.getElementById('myChart1'), config);
+  new Chart(document.getElementById('myChart2'), config);
+</script>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

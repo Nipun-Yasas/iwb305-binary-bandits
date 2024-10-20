@@ -1,0 +1,198 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.list-group-item {
+  display: flex;
+  align-items: center;
+}
+
+.list-group-item i {
+  margin-right: 10px;
+  color: blue;
+}
+
+.list-group-item.hidden i {
+  color: gray;
+}
+
+/* Custom styles for better visualization */
+.sidebar {
+  min-height: 100vh;
+}
+
+.icon-circle img {
+  border-radius: 50%;
+}
+
+.interest-badge {
+  background-color: #ffc107;
+  color: #fff;
+  padding: 0.25em 0.5em;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.more-options {
+  cursor: pointer;
+}
+
+/* Hide elements with 'hidden' class */
+.hidden {
+  display: none;
+}
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+
+p {
+    margin: 0
+}
+
+.containers {
+    max-width: 100%;
+    margin: 30px auto;
+    background-color: #e8eaf6;
+    padding: 35px;
+    border-radius: 10px;
+}
+
+.box-right {
+    padding: 30px 25px;
+    background-color: white;
+    border-radius: 15px
+}
+
+.box-left {
+    padding: 20px 20px;
+    background-color: white;
+    border-radius: 15px
+}
+
+.textmuted {
+    color: #7a7a7a
+}
+
+ .bg-green {
+    background-color: #d4f8f2;
+    color: #06e67a;
+    padding: 3px 0;
+    display: inline;
+    border-radius: 25px;
+    font-size: 11px
+} 
+
+.p-blue {
+    font-size: 14px;
+    color: #1976d2
+}
+
+.fas.fa-circle {
+    font-size: 12px
+}
+
+.p-org {
+    font-size: 14px;
+    color: #fbc02d
+}
+
+.h7 {
+    font-size: 15px
+}
+
+.h8 {
+    font-size: 12px
+}
+
+.h9 {
+    font-size: 10px
+}
+
+.bg-blue {
+    background-color: #dfe9fc9c;
+    border-radius: 5px
+}
+
+.form-control {
+    box-shadow: none !important
+}
+
+.card input::placeholder {
+    font-size: 14px
+}
+
+::placeholder {
+    font-size: 14px
+}
+
+input.card {
+    position: relative
+}
+
+
+
+.fas,
+.far {
+    cursor: pointer
+}
+
+.cursor {
+    cursor: pointer
+}
+
+
+.addRecords{
+    background-color:  #1976d2;
+    color: white;
+    font-size: 13px;
+}
+
+#editBtn:hover {
+    background-color: #396998; /* Lighter shade on hover */
+    color: white; /* Text color stays white */
+}
+
+
+@media(max-width:320px) {
+    .h8 {
+        font-size: 11px
+    }
+
+    .h7 {
+        font-size: 13px
+    }
+
+    ::placeholder {
+        font-size: 10px
+    }
+} 
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+      display: none;
+  }
+
+  .sidebar.active {
+      display: block;
+      position: absolute;
+      background-color: #343a40;
+      width: 100%;
+      z-index: 1000;
+  }
+
+  .toggle-sidebar {
+      display: block;
+  }
+  .loan{
+    text-align: center;
+  }
+}
+
+@media (min-width: 769px) {
+  .toggle-sidebar {
+      display: none;
+  }
+}
